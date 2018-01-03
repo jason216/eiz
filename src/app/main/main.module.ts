@@ -15,6 +15,8 @@ import { FuseQuickPanelComponent } from './quick-panel/quick-panel.component';
 import { FuseThemeOptionsComponent } from '../core/components/theme-options/theme-options.component';
 import { FuseShortcutsModule } from '../core/components/shortcuts/shortcuts.module';
 import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.module';
+import { PageNotFoundComponent } from './content/pages/page-not-found/page-not-found.component';
+import { DashboardComponent } from './content/app/dashboard/dashboard.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +28,9 @@ import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.mo
         FuseToolbarComponent,
         FuseNavbarVerticalToggleDirective,
         FuseThemeOptionsComponent,
-        FuseQuickPanelComponent
+        FuseQuickPanelComponent,
+        PageNotFoundComponent,
+        DashboardComponent
     ],
     imports     : [
         SharedModule,

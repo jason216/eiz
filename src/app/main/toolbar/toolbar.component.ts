@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { FuseConfigService } from '../../core/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
     selector   : 'fuse-toolbar',
     templateUrl: './toolbar.component.html',
-    styleUrls  : ['./toolbar.component.scss']
+    styleUrls  : ['./toolbar.component.scss'],
 })
 
 export class FuseToolbarComponent
@@ -20,7 +21,8 @@ export class FuseToolbarComponent
     constructor(
         private router: Router,
         private fuseConfig: FuseConfigService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private authService: AuthService,
     )
     {
         this.userStatusOptions = [
@@ -97,5 +99,10 @@ export class FuseToolbarComponent
 
         // Use the selected language for translations
         this.translate.use(lang.id);
+    }
+
+    logOut(){
+      this.authService.logout();
+      this.router.navigate(['/login']);
     }
 }

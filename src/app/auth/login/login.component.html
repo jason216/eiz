@@ -37,6 +37,9 @@
                   <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
                       Please enter a valid email address
                   </mat-error>
+                  <mat-error *ngIf="loginFormErrors.email.authFail">
+                    Please enter a valid email address
+                  </mat-error>
               </mat-form-field>
 
               <mat-form-field>
@@ -58,7 +61,7 @@
               </div>
 
               <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
-                      [disabled]="loginForm.invalid">
+                      [disabled]="loginForm.invalid" (click)=login()>
                   LOGIN
               </button>
 

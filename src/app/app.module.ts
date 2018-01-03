@@ -10,10 +10,12 @@ import { FuseMainModule } from './main/main.module';
 import { FuseSplashScreenService } from './core/services/splash-screen.service';
 import { FuseConfigService } from './core/services/config.service';
 import { FuseNavigationService } from './core/components/navigation/navigation.service';
-import { FuseSampleModule } from './main/content/sample/sample.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoginComponent } from './auth/login/login.component';
+import { PageNotFoundComponent } from './main/content/pages/page-not-found/page-not-found.component';
+import { DashboardComponent } from './main/content/app/dashboard/dashboard.component';
 import { AuthGuard } from './auth/guards/auth.guard';
+import { AuthService } from './auth/services/auth.service';
 
 const appRoutes: Routes = [
     {
@@ -21,9 +23,18 @@ const appRoutes: Routes = [
         component : LoginComponent
     },
     {
+      path      : 'dashboard',
+      component : DashboardComponent,
+      canActivate: [AuthGuard]
+    },
+    {
+      path      : '',
+      redirectTo : '/dashboard',
+      pathMatch: 'full'
+    },
+    {
         path      : '**',
-        redirectTo: 'sample',
-        canActivate: [AuthGuard]
+        component: PageNotFoundComponent,
     },
 ];
 
@@ -40,12 +51,13 @@ const appRoutes: Routes = [
         SharedModule,
         TranslateModule.forRoot(),
         FuseMainModule,
-        FuseSampleModule,
     ],
     providers   : [
         FuseSplashScreenService,
         FuseConfigService,
-        FuseNavigationService
+        FuseNavigationService,
+        AuthGuard,
+        AuthService
     ],
     bootstrap   : [
         AppComponent

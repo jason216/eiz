@@ -12,17 +12,25 @@ import { FuseConfigService } from './core/services/config.service';
 import { FuseNavigationService } from './core/components/navigation/navigation.service';
 import { FuseSampleModule } from './main/content/sample/sample.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './auth/guards/auth.guard';
 
 const appRoutes: Routes = [
     {
+        path      : 'login',
+        component : LoginComponent
+    },
+    {
         path      : '**',
-        redirectTo: 'sample'
-    }
+        redirectTo: 'sample',
+        canActivate: [AuthGuard]
+    },
 ];
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        LoginComponent
     ],
     imports     : [
         BrowserModule,
@@ -32,7 +40,7 @@ const appRoutes: Routes = [
         SharedModule,
         TranslateModule.forRoot(),
         FuseMainModule,
-        FuseSampleModule
+        FuseSampleModule,
     ],
     providers   : [
         FuseSplashScreenService,

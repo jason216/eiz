@@ -30,14 +30,11 @@
           <form name="loginForm" [formGroup]="loginForm" novalidate>
 
               <mat-form-field>
-                  <input matInput placeholder="Email" formControlName="email">
-                  <mat-error *ngIf="loginFormErrors.email.required">
+                  <input matInput placeholder="Username" formControlName="username">
+                  <mat-error *ngIf="loginFormErrors.username.required">
                       Email is required
                   </mat-error>
-                  <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
-                      Please enter a valid email address
-                  </mat-error>
-                  <mat-error *ngIf="loginFormErrors.email.authFail">
+                  <mat-error *ngIf="loginFormErrors.username.authFail">
                     Please enter a valid email address
                   </mat-error>
               </mat-form-field>
@@ -85,7 +82,7 @@
 
           <div class="register" fxLayout="column" fxLayoutAlign="center center">
               <span class="text">Don't have an account?</span>
-              <a class="link" [routerLink]="'/pages/auth/register-2'">Create an account</a>
+              <a class="link" [routerLink]="'/register'">Create an account</a>
           </div>
       </div>
   </div>

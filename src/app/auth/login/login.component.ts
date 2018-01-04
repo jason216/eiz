@@ -36,14 +36,14 @@ export class LoginComponent implements OnInit {
     });
 
     this.loginFormErrors = {
-      email   : {},
+      username: {},
       password: {}
     };
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email   : ['', [Validators.required, Validators.email]],
+      username   : ['', [Validators.required]],
       password: ['', Validators.required]
     });
 
@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
 
   login(){
     console.log(this.loginForm.value);
-    if (this.authService.login('abc', '123')){
+    if (this.authService.login(this.loginForm.get('username').value, this.loginForm.get('password').value)){
       this.router.navigate([this.returnUrl]);
     }else{
       this.loginForm.get(['password']).reset();

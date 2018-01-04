@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule  } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import 'hammerjs';
@@ -16,11 +16,16 @@ import { PageNotFoundComponent } from './main/content/pages/page-not-found/page-
 import { DashboardComponent } from './main/content/app/dashboard/dashboard.component';
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthService } from './auth/services/auth.service';
+import { RegisterComponent } from './auth/register/register.component';
 
 const appRoutes: Routes = [
     {
         path      : 'login',
         component : LoginComponent
+    },
+    {
+        path      : 'register',
+        component : RegisterComponent
     },
     {
       path      : 'dashboard',
@@ -41,7 +46,8 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent
     ],
     imports     : [
         BrowserModule,

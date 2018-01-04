@@ -9,9 +9,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string ) {
-    // return this.http.post<User>('/api/login', {email, password}).shareReplay();
-    localStorage.setItem('id_token', '123');
-    return true;
+    this.http.post('http://app.eiz.com.au/auth', {username: username, password: password}, {}).subscribe(data => {
+        if (data['ack']){
+          localStorage.setItem('token', data['data']['token']);
+          return true;
+        }
+    });
+    //
+    return false;
   }
 
   private setSession(authResult) {

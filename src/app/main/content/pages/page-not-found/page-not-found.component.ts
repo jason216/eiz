@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FuseConfigService } from '../../../../core/services/config.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,7 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private fuseConfig: FuseConfigService
+  )
+  {
+      this.fuseConfig.setSettings({
+          layout: {
+              navigation: 'none',
+              toolbar   : 'none',
+              footer    : 'none'
+          }
+      });
+  }
 
   ngOnInit() {
   }

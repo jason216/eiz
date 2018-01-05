@@ -34,15 +34,15 @@
                   <mat-error *ngIf="loginFormErrors.username.required">
                       Email is required
                   </mat-error>
-                  <mat-error *ngIf="loginFormErrors.username.authFail">
-                    Please enter a valid email address
-                  </mat-error>
               </mat-form-field>
 
               <mat-form-field>
                   <input matInput type="password" placeholder="Password" formControlName="password">
                   <mat-error *ngIf="loginFormErrors.password.required">
                       Password is required
+                  </mat-error>
+                  <mat-error *ngIf="loginFormErrors.password.authFail">
+                      Username or Password not correct
                   </mat-error>
               </mat-form-field>
 
@@ -58,7 +58,7 @@
               </div>
 
               <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
-                      [disabled]="loginForm.invalid" (click)=login()>
+                      [disabled]="loginForm.invalid" (click)=login($event.target)>
                   LOGIN
               </button>
 

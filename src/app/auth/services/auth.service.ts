@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {
@@ -9,14 +10,13 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string ) {
-    this.http.post('http://app.eiz.com.au/auth', {username: username, password: password}, {}).subscribe(data => {
+    return this.http.post('http://app.eiz.com.au/auth', {username: username, password: password}, {}).map(data => {
         if (data['ack']){
           localStorage.setItem('token', data['data']['token']);
-          return true;
+          return data['data']['token'];
         }
+        return false;
     });
-    //
-    return false;
   }
 
   private setSession(authResult) {
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('id_token');
+    localStorage.removeItem('token');
     localStorage.removeItem('expires_at');
   }
 

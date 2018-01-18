@@ -55,8 +55,6 @@ export class AuthService {
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()) );
   }
 
-
-
   private isLoggedIn() {
     if (localStorage.getItem('token')){
       return true;
@@ -75,13 +73,13 @@ export class AuthService {
   private isExpiration(){
     const expirationTime = this.getExpiration();
     const now = moment().subtract(1, 'm');
-    console.log("now", now.valueOf());
-    console.log("beforeDelete", expirationTime.valueOf());
+    //console.log("now", now.valueOf());
+    //console.log("beforeDelete", expirationTime.valueOf());
     if (now.isBefore(expirationTime)) {
       return true;
     } else {
-      console.log("Not expiration");
-      console.log(localStorage.getItem('refresh_expires_at'));
+      //console.log("Not expiration");
+      //console.log(localStorage.getItem('refresh_expires_at'));
       return false;
     }
   }
@@ -91,13 +89,13 @@ export class AuthService {
   private isActive() {
     const activeTime = this.getActive();
     const now = moment().subtract(1, 'm');
-    console.log("now", now.valueOf());
-    console.log("exprie", activeTime.valueOf());
+    //console.log("now", now.valueOf());
+    //console.log("exprie", activeTime.valueOf());
     if (now.isBefore(activeTime)) {
       return true;
     }else{
-      console.log("Not active");
-      console.log(localStorage.getItem('expires_at'));
+      //console.log("Not active");
+      //console.log(localStorage.getItem('expires_at'));
       return false;
     }
 

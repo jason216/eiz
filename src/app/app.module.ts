@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule  } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -17,6 +18,7 @@ import { DashboardComponent } from './main/content/app/dashboard/dashboard.compo
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthService } from './auth/services/auth.service';
 import { RegisterComponent } from './auth/register/register.component';
+import { ApiService } from './services/api.service';
 
 const appRoutes: Routes = [
     {
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
     ],
     imports     : [
         BrowserModule,
+        HttpModule,
         HttpClientModule,
         BrowserAnimationsModule,
         RouterModule.forRoot(appRoutes),
@@ -63,7 +66,8 @@ const appRoutes: Routes = [
         FuseConfigService,
         FuseNavigationService,
         AuthGuard,
-        AuthService
+        AuthService,
+        ApiService,
     ],
     bootstrap   : [
         AppComponent

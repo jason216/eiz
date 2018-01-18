@@ -14,9 +14,9 @@ export class ApiService {
 
   public get(endpoint: string, target: string): Promise<any> {
     let resourceUrl = this.url + '/' + endpoint + '/' + target;
-    // if (endpoint === 'auth') {
-    //   resourceUrl = this.url + '/' + target;
-    // }
+    if (endpoint === 'auth') {
+      resourceUrl = this.url + '/' + target;
+    }
     ++this.activeRequests;
 
     return this.http.get(resourceUrl, this.setHeaders())
@@ -30,9 +30,9 @@ export class ApiService {
 
   public post(endpoint: string, target: string, data: any, reply: boolean = true): Promise<any> {
     let resourceUrl = this.url + '/' + endpoint + '/' + target;
-    // if (endpoint === 'auth'){
-    //   resourceUrl = this.url + '/' + target;
-    // }
+    if (endpoint === 'auth'){
+      resourceUrl = this.url + '/' + target;
+    }
     ++this.activeRequests;
 
     return this.http.post(resourceUrl, data, this.setHeaders())
@@ -64,7 +64,7 @@ export class ApiService {
     const headers = new Headers();
 
     headers.set('Content-Type', 'application/json; charset=UTF-8');
-    headers.set('Authorization', localStorage.getItem('id_token'));
+    headers.set('Authorization', 'Bearer' + localStorage.getItem('token'));
 
     return new RequestOptions({ headers: headers });
   }

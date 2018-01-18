@@ -72,6 +72,19 @@ export class AuthService {
     return this.getStorageTime('refresh_expires_at');
   }
 
+  private isExpiration(){
+    const expirationTime = this.getExpiration();
+    const now = moment().subtract(1, 'm');
+    console.log("now", now.valueOf());
+    console.log("beforeDelete", expirationTime.valueOf());
+    if (now.isBefore(expirationTime)) {
+      return true;
+    } else {
+      console.log("Not expiration");
+      console.log(localStorage.getItem('refresh_expires_at'));
+      return false;
+    }
+  }
   private getActive() {
     return this.getStorageTime('expires_at');
   }

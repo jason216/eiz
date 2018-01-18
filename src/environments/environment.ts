@@ -5,6 +5,5 @@
 
 export const environment = {
     production: false,
-    hmr       : false,
-    apiUrl: 'http://app.eiz.com.au/auth',
+    hmr       : false
 };

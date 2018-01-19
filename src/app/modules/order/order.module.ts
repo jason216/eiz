@@ -6,8 +6,7 @@ import { SharedModule } from '../../core/modules/shared.module';
 import { FuseWidgetModule } from '../../core/components/widget/widget.module';
 
 import { OrderComponent } from './order.component';
-//import { OrderService } from './order.service';
-
+import { OrderSearchDialogComponent } from './components/order-search-dialog/order-search-dialog.component';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -30,10 +29,11 @@ const routes: Routes = [
     })
   ],
   declarations: [
-    OrderComponent
+    OrderComponent,
+    OrderSearchDialogComponent
   ],
-  providers: [
-
+  entryComponents: [
+    OrderSearchDialogComponent
   ]
 })
 

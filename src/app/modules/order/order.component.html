@@ -1,5 +1,66 @@
 <div id="orders" class="page-layout carded fullwidth" fusePerfectScrollbar>
 
-<p>12341234</p>
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg mat-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- CENTER -->
+    <div class="center">
+
+
+      <!-- / HEADER -->
+      <div class="toolbar mt-24" fxLayout="column">
+        <div class="eiz-card mat-white-bg my-12 p-sm-4" fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px">
+          <div class="p-12 p-sm-4 w-100-p" fxFlex="100">
+              <mat-form-field class="w-60-p" floatPlaceholder="never" >
+                <input id="search" matInput #filter placeholder="Search">
+                <mat-icon class="secondary-text" matSuffix>search</mat-icon>
+              </mat-form-field>
+              <button mat-raised-button color="primary" (click)= "openAdvancedSearch()">Advanced Search</button>
+          </div>
+        </div>
+
+        <!-- <div class="eiz-card mat-white-bg my-12 p-12 p-sm-4" fxFlex="100" fxLayout="row wrap" fxLayoutGap="8px">
+          <div class="functions-area p-12 p-sm-4">
+            <button mat-raised-button class="mb-4" color="primary">Print</button>
+            <button mat-raised-button class="mb-4" color="primary">Complete</button>
+            <button mat-raised-button class="mb-4" color="primary">Process</button>
+            <button mat-raised-button class="mb-4" color="primary">Export to Courier</button>
+            <button mat-raised-button class="mb-4" color="primary">Export CSV</button>
+            <button mat-raised-button class="mb-4" color="primary">Analysis</button>
+            <button mat-raised-button class="mb-4" color="primary">Mark as Un-Manifested</button>
+            <button mat-raised-button class="mb-4" color="primary">Mark as Manifested</button>
+            <button mat-raised-button class="mb-4" color="primary">Mark as Shipped</button>
+          </div>
+        </div> -->
+      </div>
+
+      <!-- CONTENT CARD -->
+      <div class="content-card mat-white-bg">
+
+
+        <ngx-datatable
+          #myTable
+          class='material fullscreen expandable'
+          [columnMode]="'force'"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          [rowHeight]="50"
+          [rows]=rows
+          [columns]=columnsRef
+          [externalPaging]="true"
+          [count]="page.totalElements"
+          [offset]="page.pageNumber"
+          [limit]="page.size"
+          (page)='setPage($event)'>
+
+
+
+        </ngx-datatable>
+
+      </div>
+      <!-- / CONTENT CARD -->
+    </div>
+    <!-- / CENTER -->
 </div>
 

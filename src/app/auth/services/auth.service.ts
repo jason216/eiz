@@ -11,12 +11,11 @@ import { log } from 'util';
 @Injectable()
 export class AuthService {
 
-
-  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {
+  constructor( private router: Router, private apiService: ApiService) {
     //console.log('Autthhhhhhh');
     //console.log(localStorage.getItem('token'));
     if (this.isAuthenticated() ){
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['default']);
       //console.log('Autthhhhhhh');
     }
   }
@@ -30,17 +29,40 @@ export class AuthService {
     }
     return false;
   }
-  login(username: string, password: string ) {
-    this.apiService.post('auth', 'auth', { email: username, password: password }, true).then(response => {
-      if (response['data']) {
-        this.setSession(response['data']);
-        this.router.navigate(['dashboard']);
+  private renewToken() {
+    this.apiService.post('auth', 'update').subscribe(
+      res => {
+        if (res['data']){
+          this.setSession(res['data']);
+        }
+      },
+      err => {
+        console.log(`Error in auth-renew-token: ${err}`);
+      },
+      () => {
+        console.log('auth-renew-token Completed');
       }
-    });
-
+    );
   }
 
-  logout() {
+  public login(username: string, password: string ) {
+    this.apiService.post('auth', 'auth', { email: username, password: password }).subscribe(
+      res => {
+        if (res['data']) {
+          this.setSession(res['data']);
+          this.router.navigate(['default']);
+        }
+      },
+      err => {
+        console.log(`Error in auth-login: ${err}`);
+      },
+      () =>{
+        console.log('auth-login Completed');
+      }
+    );
+  }
+
+  public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh_expires_at');
     localStorage.removeItem('expires_at');
@@ -98,15 +120,6 @@ export class AuthService {
       //console.log(localStorage.getItem('expires_at'));
       return false;
     }
-
-  }
-
-  private renewToken(){
-    this.apiService.post('auth', 'update', true).then(response => {
-      if (response['data']) {
-        this.setSession(response['data']);
-      }
-    });
   }
 
 }

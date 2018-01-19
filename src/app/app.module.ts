@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import 'hammerjs';
 
@@ -24,9 +25,18 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 import { AuthGuard } from './auth/guards/auth.guard';
 import { AuthService } from './auth/services/auth.service';
+import { ApiTokenInterceptor } from './services/api-token.interceptor';
 import { ApiService } from './services/api.service';
+import { OrderService } from './services/order.service';
+import { PaginationService } from './services/pagination.service';
 
 import { routing } from './app.routing';
+
+export const providers = [
+  ApiService,
+  OrderService,
+  PaginationService
+];
 
 @NgModule({
     declarations: [
@@ -47,12 +57,19 @@ import { routing } from './app.routing';
         routing
     ],
     providers   : [
+        {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ApiTokenInterceptor,
+        multi: true
+        },
         FuseSplashScreenService,
         FuseConfigService,
         FuseNavigationService,
         AuthGuard,
         AuthService,
         ApiService,
+        OrderService,
+        PaginationService
     ],
     bootstrap   : [
         AppComponent

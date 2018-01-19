@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadChildren: './modules/order/order.module#OrderModule'
   },
   {
+    path: 'default',
+    redirectTo: 'apps/order'
+  },
+  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'

@@ -1,9 +1,13 @@
 :host {
-  .header {
-    .search-input-wrapper {
-      max-width: 480px;
-    }
+  .topbar{
+    height: 40px;
   }
+
+  .search-input-wrapper {
+    padding: 12px;
+  }
+
+
   .mat-tab-group,
   .mat-tab-body-wrapper,
   .tab-content {
